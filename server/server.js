@@ -1,5 +1,8 @@
 require('./config/config');
 const express = require('express');
+// se carga mongoose
+const mongoose = require('mongoose');
+
 const app = express();
 const bodyParser = require('body-parser');
 
@@ -10,42 +13,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-//esta es la petición get
-app.get('/', (req, res) => {
-    res.json('Hello world');
-});
+//Esto es para usar el archivo usuario.js
+app.use(require('./routes/usuario'));
 
-app.get('/usuario', (req, res) => {
-    res.json('get usuario local');
-});
-
-// para crear nuevos registros
-app.post('/usuario', (req, res) => {
-    let body = req.body;
-    if (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        });
-    } else {
-        res.json({
-            persona: body
-        });
-    }
-});
-
-
-//put es para actualizar registros
-app.put('/usuario/:id', (req, res) => {
-    let id = req.params.id;
-    res.json({
-        id
-    });
-});
-
-// delete
-app.delete('/usuario', (req, res) => {
-    res.json('delete usuario');
+//para conectarme a la base de datos
+mongoose.connect('mongodb://localhost:27017/cafe', (err, res) => {
+    if (err) throw err;
+    console.log('Base de datos ONLINE');
 });
 
 //esta variable viene de la carpeta config para la variable del puerto
