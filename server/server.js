@@ -1,3 +1,4 @@
+require('./config/config');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -47,6 +48,7 @@ app.delete('/usuario', (req, res) => {
     res.json('delete usuario')
 });
 
-app.listen(3000, () => {
-    console.log('Escuchando el puerto 3000');
+//esta variable viene de la carpeta config para la variable del puerto
+app.listen(process.env.PORT, () => {
+    console.log(`Escuchando el puerto ${process.env.PORT}`);
 });
