@@ -1,2 +1,0 @@
-// para poder utilizar mongodb
-npm install mongoose --save 
