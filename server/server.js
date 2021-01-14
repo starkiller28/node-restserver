@@ -16,11 +16,13 @@ app.use(bodyParser.json());
 //Esto es para usar el archivo usuario.js
 app.use(require('./routes/usuario'));
 
-//para conectarme a la base de datos
-mongoose.connect('mongodb://localhost:27017/cafe', (err, res) => {
+//para conectarme a la base de datos de mongo
+// process.env.URLDB viene de congif.js 
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
     if (err) throw err;
     console.log('Base de datos ONLINE');
 });
+
 
 //esta variable viene de la carpeta config para la variable del puerto
 app.listen(process.env.PORT, () => {
