@@ -11,7 +11,8 @@ let urlDB;
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/cafe';
 } else {
-    urlDB = 'mongodb+srv://Sebas:k5id9KJO08Zhxwvi@cluster0.wvnkb.mongodb.net/cafe';
+    //MONGO_URI= variable que se crea con heroku config para camuflar el usuario y contraseña de atlas
+    urlDB = process.env.MONGO_URI;
 }
 
 //Esta variable la utilizamos en el server.js para conectarnos a la db
