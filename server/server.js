@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-//Esto es para usar el archivo usuario.js
-app.use(require('./routes/usuario'));
+//Esto es para poder usar todas las rutas que tengamos, ya que todas se almacenan ahí
+app.use(require('./routes/index'));
 
 //para conectarme a la base de datos de mongo
 // process.env.URLDB viene de congif.js 

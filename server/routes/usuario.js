@@ -9,10 +9,13 @@ const _ = require('underscore');
 //el modelo de la base de datos models/usuario.js
 const Usuario = require('../models/usuario');
 
+//función para verificar si el token es válido
+const { verificaToken } = require('../middlewares/autenticacion')
+
 const app = express();
 
 //-----------------------------------------esta es la petición get
-app.get('/usuario', (req, res) => {
+app.get('/usuario', verificaToken, (req, res) => {
 
     //Esto será un parámetro opcional y se pone así "/usuario?desde=10"
     let desde = req.query.desde || 0;
