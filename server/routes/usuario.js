@@ -10,7 +10,7 @@ const _ = require('underscore');
 const Usuario = require('../models/usuario');
 
 //función para verificar si el token es válido
-const { verificaToken } = require('../middlewares/autenticacion')
+const { verificaToken, verificaAdmin_role } = require('../middlewares/autenticacion')
 
 const app = express();
 
@@ -59,7 +59,7 @@ app.get('/usuario', verificaToken, (req, res) => {
 });
 
 //-----------------------------------------para crear nuevos registros
-app.post('/usuario', (req, res) => {
+app.post('/usuario', [verificaToken, verificaAdmin_role], (req, res) => {
     let body = req.body;
 
     let usuario = new Usuario({
@@ -88,7 +88,7 @@ app.post('/usuario', (req, res) => {
 });
 
 //-----------------------------------put es para actualizar registros
-app.put('/usuario/:id', (req, res) => {
+app.put('/usuario/:id', [verificaToken, verificaAdmin_role], (req, res) => {
     //se coge el id porque con ese se buscará para actualizarlo
     let id = req.params.id;
 
@@ -112,7 +112,7 @@ app.put('/usuario/:id', (req, res) => {
 });
 
 //--------------------------------------delete
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id', [verificaToken, verificaAdmin_role], (req, res) => {
     let id = req.params.id;
     //Con este código se elimina completamente
     // Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
