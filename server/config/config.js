@@ -34,3 +34,8 @@ if (process.env.NODE_ENV === 'dev') {
 
 //Esta variable la utilizamos en el server.js para conectarnos a la db
 process.env.URLDB = urlDB;
+
+//======================
+// Google client ID
+//======================
+process.env.CLIENT_ID = process.env.CLIENT_ID || '896017711533-0qgckaodoopa75u0ndp7crra2kr97kva.apps.googleusercontent.com';
